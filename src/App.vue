@@ -1,11 +1,12 @@
 <script setup>
-const current_date = new Date()
+import StandardButton from '@/components/StandardButton.vue'
 </script>
 
 <template>
-  <div class="date">
-    {{ current_date }}
-  </div>
+  <main class="main">
+    <StandardButton>Начать игру</StandardButton>
+  </main>
+
 </template>
 
 <style scoped>
