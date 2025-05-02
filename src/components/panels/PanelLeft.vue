@@ -1,7 +1,7 @@
 <script setup>
 import IconLocation from '@/components/icons/IconLocation.vue'
 import IconSun from '@/components/icons/weather/IconSun.vue'
-import { computed, inject } from 'vue'
+import { computed, inject, onMounted, ref } from 'vue'
 import { cityProvide } from '@/constants.js'
 import IconCloud from '@/components/icons/weather/IconCloud.vue'
 import IconRain from '@/components/icons/weather/IconRain.vue'
@@ -32,6 +32,16 @@ const weatherCode = computed(() => {
   return dayData.day.condition.code
 })
 const city = inject(cityProvide)
+
+const screenWidth = ref()
+const onResize = () => screenWidth.value = window.innerWidth;
+const iconSize = computed(() => {
+  return screenWidth.value <= 768 ? '54' : '95'
+})
+onMounted(() => {
+  window.addEventListener('resize', onResize);
+  onResize()
+})
 </script>
 
 <template>
@@ -45,9 +55,9 @@ const city = inject(cityProvide)
   </div>
   <div class="weather">
     <div class="icon">
-      <icon-sun v-if="weatherCode <= 1003" size="95" />
-      <icon-cloud v-if="weatherCode >= 1006 && weatherCode < 1063" size="95" />
-      <icon-rain v-if="weatherCode >= 1063" size="95" />
+      <icon-sun v-if="weatherCode <= 1003" :size="iconSize" />
+      <icon-cloud v-if="weatherCode >= 1006 && weatherCode < 1063" :size="iconSize" />
+      <icon-rain v-if="weatherCode >= 1063" :size="iconSize" />
     </div>
     <p class="temp">{{ dayData?.day?.avgtemp_c ?? '-' }} °C</p>
     <p class="weather-type">{{ dayData?.day?.condition?.text ?? '-' }}</p>
@@ -111,5 +121,35 @@ const city = inject(cityProvide)
   line-height: 100%;
   letter-spacing: 0;
   margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .weather {
+    align-items: flex-end;
+  }
+  .weather-type {
+    text-align: right;
+  }
+  .weather .icon {
+    margin-right: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+  .day {
+    font-size: 27px;
+  }
+  .full-date {
+    font-size: 16px;
+  }
+  .location {
+    font-size: 16px;
+  }
+  .temp {
+    font-size: 27px;
+  }
+  .weather-type {
+    font-size: 16px;
+  }
 }
 </style>

@@ -47,4 +47,17 @@ function edit() {
 .city-select {
   width: 420px;
 }
+@media (max-width: 768px) {
+  .city-select {
+    width: 100%;
+  }
+  .city-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .city-input input {
+    width: 100%;
+  }
+}
 </style>

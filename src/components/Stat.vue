@@ -27,4 +27,10 @@ const props = defineProps({
 .stat-value {
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .stat {
+    font-size: 18px;
+  }
+}
 </style>

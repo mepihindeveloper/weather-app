@@ -81,4 +81,10 @@ const statData = computed(() => {
   flex-direction: column;
   gap: 16px;
 }
+@media (max-width: 768px) {
+  .date-wrapper {
+    gap: 25px;
+    margin-bottom: 25px;
+  }
+}
 </style>

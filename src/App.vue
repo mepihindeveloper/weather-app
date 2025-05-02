@@ -21,7 +21,7 @@ onMounted(() => {
 
 async function getCity(city) {
   const params = new URLSearchParams({ city: city})
-  const response = await fetch(`${API_ENDPOINT}/?${params.toString()}`)
+  const response = await fetch(`${API_ENDPOINT}/server?${params.toString()}`)
   if (response.status !== 200) {
     error.value = await response.json()
     data.value = null
@@ -79,5 +79,26 @@ function setActive(index) {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .left-panel {
+    flex-direction: row;
+    max-width: 500px;
+    max-height: 200px;
+    width: 100%;
+    align-items: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+  .right-panel {
+    padding: 20px;
+    background-color: transparent;
+    height: auto;
+  }
 }
 </style>
